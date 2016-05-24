@@ -23,7 +23,7 @@ def generate_post():
         text = f.read()
 
     text_model = markovify.Text(text, state_size=2)
-    output_text = "@acoluthon " + text_model.make_short_sentence(140) # was 140
+    output_text = "@acoluthon " + text_model.make_short_sentence(129) # was 140
 
     # Write the status to a file, for debugging
     with open('history.txt', 'a') as f:
