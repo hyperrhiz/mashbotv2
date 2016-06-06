@@ -1,24 +1,24 @@
 from __future__ import print_function
 import markovify
-#import tweepy
+import tweepy
 import random
 import datetime
-#from keys import keys
+from keys import keys
 from unidecode import unidecode
 import textwrap
 from Adafruit_Thermal import *
 
 
 # Starts the api and auth
-#consumer_key = keys['consumer_key']
-#consumer_secret = keys['consumer_secret']
-#access_token = keys['access_token']
-#access_token_secret = keys['access_token_secret']
+consumer_key = keys['consumer_key']
+consumer_secret = keys['consumer_secret']
+access_token = keys['access_token']
+access_token_secret = keys['access_token_secret']
 
-#auth = tweepy.OAuthHandler(consumer_key, consumer_secret)
-#auth.set_access_token(access_token, access_token_secret)
+auth = tweepy.OAuthHandler(consumer_key, consumer_secret)
+auth.set_access_token(access_token, access_token_secret)
 
-#api = tweepy.API(auth)
+api = tweepy.API(auth)
 
 
 # Creates the post and logs to a file
@@ -46,7 +46,7 @@ def generate_post():
         f.write('mashed: ' + mash_text + ' | tweeted: ' + output_text + '\n')
 
     return output_text
-generate_post()
+#generate_post()
 
 # Post the status to Twitter
-#api.update_status(status=generate_post())
+api.update_status(status=generate_post())

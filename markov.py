@@ -36,7 +36,7 @@ def generate_post():
     printer.feed(3)
 
     # Write the status to a file, for debugging
-    with open('history.txt', 'a') as f:
+    with open('debug.txt', 'a') as f:
         f.write(output_text + '\n')
 
     return output_text
