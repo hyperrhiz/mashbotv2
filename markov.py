@@ -3,6 +3,7 @@ import tweepy
 import random
 import datetime
 from keys import keys
+from Adafruit_Thermal import *
 
 
 # Starts the api and auth
@@ -24,6 +25,15 @@ def generate_post():
 
     text_model = markovify.Text(text, state_size=2)
     output_text = "@acoluthon " + text_model.make_short_sentence(129) # was 140
+
+    printer = Adafruit_Thermal("/dev/ttyAMA0", 19200, timeout=5)
+    printer.feed(3)
+    printer.boldOn()
+    printer.println("Mash Note")
+    printer.boldOff()
+    printer.feed(3)
+    printer.println(output_text)
+    printer.feed(3)
 
     # Write the status to a file, for debugging
     with open('history.txt', 'a') as f:
