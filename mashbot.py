@@ -1,3 +1,4 @@
+#!/usr/bin/python
 from __future__ import print_function
 import markovify
 import tweepy
@@ -23,7 +24,7 @@ api = tweepy.API(auth)
 
 # Creates the post and logs to a file
 def generate_post():
-    with open('cleaned.txt') as f:
+    with open('/home/yuri/mashbotv2/cleaned.txt') as f:
         text = f.read()
 
     text_model = markovify.Text(text, state_size=2)
@@ -32,20 +33,24 @@ def generate_post():
     output_text = "@acoluthon " + mash_text
 
     printer = Adafruit_Thermal("/dev/ttyAMA0", 19200, timeout=5)
+    printer.setDefault()
     printer.justify('L')
     printer.feed(3)
-    printer.doubleHeightOn()
+    printer.boldOn()
+    printer.setSize('M')
     printer.println("Mash Note")
-    printer.doubleHeightOff()
-    printer.feed(1)
+    printer.setSize('S')
+    printer.boldOff()
     printer.println(wrapped_text)
-    printer.feed(3)
+    printer.feed(2)
 
     # Write the status to a file, for debugging
-    with open('history.txt', 'a') as f:
+    with open('/home/yuri/mashbotv2/history.txt', 'a') as f:
         f.write('mashed: ' + mash_text + ' | tweeted: ' + output_text + '\n')
 
     return output_text
+
+#if not posting to twitter, uncomment to get output
 #generate_post()
 
 # Post the status to Twitter
